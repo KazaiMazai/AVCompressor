@@ -10,6 +10,12 @@
 		EAFFDDE0238827110042959D /* AVCompressor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAFFDDD6238827100042959D /* AVCompressor.framework */; };
 		EAFFDDE5238827110042959D /* AVCompressorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDDE4238827110042959D /* AVCompressorTests.swift */; };
 		EAFFDDE7238827110042959D /* AVCompressor.h in Headers */ = {isa = PBXBuildFile; fileRef = EAFFDDD9238827100042959D /* AVCompressor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EAFFDDF323882DD90042959D /* MediaLibraryExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDDF023882DD90042959D /* MediaLibraryExportService.swift */; };
+		EAFFDDF423882DD90042959D /* MediaLibraryExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDDF023882DD90042959D /* MediaLibraryExportService.swift */; };
+		EAFFDDF523882DD90042959D /* MediaLibraryExportServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDDF123882DD90042959D /* MediaLibraryExportServiceProtocol.swift */; };
+		EAFFDDF623882DD90042959D /* MediaLibraryExportServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDDF123882DD90042959D /* MediaLibraryExportServiceProtocol.swift */; };
+		EAFFDDF723882DD90042959D /* MediaExportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDDF223882DD90042959D /* MediaExportSettings.swift */; };
+		EAFFDDF823882DD90042959D /* MediaExportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDDF223882DD90042959D /* MediaExportSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +35,9 @@
 		EAFFDDDF238827110042959D /* AVCompressorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AVCompressorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAFFDDE4238827110042959D /* AVCompressorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCompressorTests.swift; sourceTree = "<group>"; };
 		EAFFDDE6238827110042959D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EAFFDDF023882DD90042959D /* MediaLibraryExportService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaLibraryExportService.swift; sourceTree = "<group>"; };
+		EAFFDDF123882DD90042959D /* MediaLibraryExportServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaLibraryExportServiceProtocol.swift; sourceTree = "<group>"; };
+		EAFFDDF223882DD90042959D /* MediaExportSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaExportSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +80,9 @@
 		EAFFDDD8238827100042959D /* AVCompressor */ = {
 			isa = PBXGroup;
 			children = (
+				EAFFDDF223882DD90042959D /* MediaExportSettings.swift */,
+				EAFFDDF023882DD90042959D /* MediaLibraryExportService.swift */,
+				EAFFDDF123882DD90042959D /* MediaLibraryExportServiceProtocol.swift */,
 				EAFFDDD9238827100042959D /* AVCompressor.h */,
 				EAFFDDDA238827100042959D /* Info.plist */,
 			);
@@ -148,6 +160,7 @@
 				TargetAttributes = {
 					EAFFDDD5238827100042959D = {
 						CreatedOnToolsVersion = 10.2;
+						LastSwiftMigration = 1020;
 					};
 					EAFFDDDE238827110042959D = {
 						CreatedOnToolsVersion = 10.2;
@@ -194,6 +207,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAFFDDF723882DD90042959D /* MediaExportSettings.swift in Sources */,
+				EAFFDDF523882DD90042959D /* MediaLibraryExportServiceProtocol.swift in Sources */,
+				EAFFDDF323882DD90042959D /* MediaLibraryExportService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +217,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAFFDDF623882DD90042959D /* MediaLibraryExportServiceProtocol.swift in Sources */,
+				EAFFDDF423882DD90042959D /* MediaLibraryExportService.swift in Sources */,
 				EAFFDDE5238827110042959D /* AVCompressorTests.swift in Sources */,
+				EAFFDDF823882DD90042959D /* MediaExportSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +360,7 @@
 		EAFFDDEB238827110042959D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -358,6 +378,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kazai.AVCompressor;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -366,6 +387,7 @@
 		EAFFDDEC238827110042959D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -391,6 +413,7 @@
 		EAFFDDEE238827110042959D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZC6RHMUG6E;
 				INFOPLIST_FILE = AVCompressorTests/Info.plist;
@@ -409,6 +432,7 @@
 		EAFFDDEF238827110042959D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZC6RHMUG6E;
 				INFOPLIST_FILE = AVCompressorTests/Info.plist;
