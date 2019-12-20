@@ -17,13 +17,33 @@ public class CompressorManager {
   var currentDefaultOptions: CompressorExportOptions {
     return [] + defaultOptions
   }
+  
+  func exportVideoAsset(_ libraryAsset: PHAsset, options: CompressorExportOptions?, complete: @escaping ResultCompleteHandler<URL, Error>) {
+    
+    exportOriginalVideoAsset(libraryAsset, options: options) { [weak self] in
+      switch $0 {
+      case .success(let exportedURL):
+        self?.performVideoResizeAt(exportedURL, options: options, complete: complete)
+      case .failure(let error):
+        complete(Result(error: error))
+      }
+    }
+  }
 
-  fileprivate func exportVideoAsset(_ libraryAsset: PhotoLibraryAsset, name: String, options: CompressorExportOptions?, complete: @escaping ResultCompleteHandler<URL, Error>) {
-    guard libraryAsset.underlyingAsset.mediaType == .video else {
+  func resizeVideoFileAt(_ url: URL, options: CompressorExportOptions?, complete: @escaping ResultCompleteHandler<URL, Error>) {
+    performVideoResizeAt(url, options: options, complete: complete)
+  }
+}
+
+
+//MARK:- CompressorManager private stuff
+
+extension CompressorManager {
+  fileprivate func exportOriginalVideoAsset(_ libraryAsset: PHAsset, options: CompressorExportOptions?, complete: @escaping ResultCompleteHandler<URL, Error>) {
+    guard libraryAsset.mediaType == .video else {
       complete(Result(error: CompressorError.assetTypeError))
       return
     }
-    
     
     let options = currentDefaultOptions + (options ?? EmptyCompressorExportOptions)
     
@@ -35,7 +55,7 @@ public class CompressorManager {
     let videoRequestOptions: PHVideoRequestOptions = PHVideoRequestOptions()
     videoRequestOptions.version = .current
     
-    PHImageManager.default().requestExportSession(forVideo: libraryAsset.underlyingAsset, options: videoRequestOptions, exportPreset: options.assetExportPreset, resultHandler: { (session, info) in
+    PHImageManager.default().requestExportSession(forVideo: libraryAsset, options: videoRequestOptions, exportPreset: options.assetExportPreset, resultHandler: { (session, info) in
       
       guard let session = session else { return }
       session.outputURL = assetLocalPath
@@ -56,6 +76,8 @@ public class CompressorManager {
           complete(Result(error: CompressorError.videoExportSessionError))
         case .cancelled:
           break
+        @unknown default:
+          complete(Result(error: CompressorError.videoExportSessionError))
         }
       }
     })
@@ -113,26 +135,25 @@ public class CompressorManager {
     return finalTransform
   }
   
-  
   fileprivate func originalSizeForVideoTrackOrinentation(videoTrackOrientation: UIImage.Orientation, naturalSize: CGSize) -> CGSize {
-    let videoMinDimension = min(naturalSize.width, naturalSize.height)
-    let videoMaxDimension = max(naturalSize.width, naturalSize.height)
-    
-    
-    var originalSize = CGSize.zero
-    switch videoTrackOrientation {
-    case .up, .down:
-      originalSize = CGSize(width: videoMinDimension, height: videoMaxDimension)
-    case .left, .right:
-      originalSize = naturalSize
-    default:
-      break
-    }
-    
-    return originalSize
-  }
+     let videoMinDimension = min(naturalSize.width, naturalSize.height)
+     let videoMaxDimension = max(naturalSize.width, naturalSize.height)
+     
+     
+     var originalSize = CGSize.zero
+     switch videoTrackOrientation {
+     case .up, .down:
+       originalSize = CGSize(width: videoMinDimension, height: videoMaxDimension)
+     case .left, .right:
+       originalSize = naturalSize
+     default:
+       break
+     }
+     
+     return originalSize
+   }
   
-  func resizeVideoAt(_ url: URL, options: CompressorExportOptions?, complete: @escaping ResultCompleteHandler<URL, Error>) {
+  fileprivate func performVideoResizeAt(_ url: URL, options: CompressorExportOptions?, complete: @escaping ResultCompleteHandler<URL, Error>) {
     
     let dirUrl = url.deletingLastPathComponent()
     
