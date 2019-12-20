@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		EA989BE023AD061D00EC954F /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA989BDF23AD061D00EC954F /* Result.swift */; };
 		EA989BE123AD061D00EC954F /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA989BDF23AD061D00EC954F /* Result.swift */; };
+		EA989BE323AD100400EC954F /* PHAsset+Compressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA989BE223AD100400EC954F /* PHAsset+Compressor.swift */; };
+		EA989BE423AD100400EC954F /* PHAsset+Compressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA989BE223AD100400EC954F /* PHAsset+Compressor.swift */; };
 		EAFFDDE0238827110042959D /* AVCompressor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAFFDDD6238827100042959D /* AVCompressor.framework */; };
 		EAFFDDE5238827110042959D /* AVCompressorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDDE4238827110042959D /* AVCompressorTests.swift */; };
 		EAFFDDE7238827110042959D /* AVCompressor.h in Headers */ = {isa = PBXBuildFile; fileRef = EAFFDDD9238827100042959D /* AVCompressor.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -20,8 +22,6 @@
 		EAFFDE01239147A90042959D /* CompressorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDDFF239147A90042959D /* CompressorManager.swift */; };
 		EAFFDE032391902D0042959D /* CompressorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDE022391902D0042959D /* CompressorError.swift */; };
 		EAFFDE042391902D0042959D /* CompressorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDE022391902D0042959D /* CompressorError.swift */; };
-		EAFFDE06239197030042959D /* PhotoLibraryAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDE05239197030042959D /* PhotoLibraryAsset.swift */; };
-		EAFFDE07239197030042959D /* PhotoLibraryAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDE05239197030042959D /* PhotoLibraryAsset.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		EA989BDF23AD061D00EC954F /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		EA989BE223AD100400EC954F /* PHAsset+Compressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAsset+Compressor.swift"; sourceTree = "<group>"; };
 		EAFFDDD6238827100042959D /* AVCompressor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AVCompressor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAFFDDD9238827100042959D /* AVCompressor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVCompressor.h; sourceTree = "<group>"; };
 		EAFFDDDA238827100042959D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -46,7 +47,6 @@
 		EAFFDDFC239145A90042959D /* Compressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compressor.swift; sourceTree = "<group>"; };
 		EAFFDDFF239147A90042959D /* CompressorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompressorManager.swift; sourceTree = "<group>"; };
 		EAFFDE022391902D0042959D /* CompressorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompressorError.swift; sourceTree = "<group>"; };
-		EAFFDE05239197030042959D /* PhotoLibraryAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryAsset.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +95,8 @@
 				EAFFDDFC239145A90042959D /* Compressor.swift */,
 				EAFFDDFF239147A90042959D /* CompressorManager.swift */,
 				EAFFDE022391902D0042959D /* CompressorError.swift */,
-				EAFFDE05239197030042959D /* PhotoLibraryAsset.swift */,
 				EA989BDF23AD061D00EC954F /* Result.swift */,
+				EA989BE223AD100400EC954F /* PHAsset+Compressor.swift */,
 			);
 			path = AVCompressor;
 			sourceTree = "<group>";
@@ -220,8 +220,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA989BE023AD061D00EC954F /* Result.swift in Sources */,
-				EAFFDE06239197030042959D /* PhotoLibraryAsset.swift in Sources */,
 				EAFFDE032391902D0042959D /* CompressorError.swift in Sources */,
+				EA989BE323AD100400EC954F /* PHAsset+Compressor.swift in Sources */,
 				EAFFDDFD239145A90042959D /* Compressor.swift in Sources */,
 				EAFFDE00239147A90042959D /* CompressorManager.swift in Sources */,
 				EAFFDDFA2391407B0042959D /* CompressorOptions.swift in Sources */,
@@ -236,8 +236,8 @@
 				EAFFDE01239147A90042959D /* CompressorManager.swift in Sources */,
 				EAFFDDE5238827110042959D /* AVCompressorTests.swift in Sources */,
 				EAFFDDFE239145A90042959D /* Compressor.swift in Sources */,
+				EA989BE423AD100400EC954F /* PHAsset+Compressor.swift in Sources */,
 				EA989BE123AD061D00EC954F /* Result.swift in Sources */,
-				EAFFDE07239197030042959D /* PhotoLibraryAsset.swift in Sources */,
 				EAFFDE042391902D0042959D /* CompressorError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
