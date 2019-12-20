@@ -101,7 +101,7 @@ extension CompressorManager {
     return .up
   }
   
-  fileprivate func getTranformationFor(_ videoTrackOrientation: UIImage.Orientation, naturalSize: CGSize, crop: CGPoint, scale: CGPoint) -> CGAffineTransform {
+  fileprivate func getAffineTranformFor(_ videoTrackOrientation: UIImage.Orientation, naturalSize: CGSize, crop: CGPoint, scale: CGPoint) -> CGAffineTransform {
     let cropOffX = crop.x
     let cropOffY = crop.y
     
@@ -153,40 +153,26 @@ extension CompressorManager {
      return originalSize
    }
   
-  fileprivate func performVideoResizeAt(_ url: URL, options: CompressorExportOptions?, complete: @escaping ResultCompleteHandler<URL, Error>) {
-    
-    let dirUrl = url.deletingLastPathComponent()
-    
-    let options = currentDefaultOptions + (options ?? EmptyCompressorExportOptions)
-    
-    let asset = AVAsset(url: url)
-    let composition = AVMutableComposition()
-    composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)
-        
-    guard let clipVideoTrack = asset.tracks(withMediaType: .video).first else {
-      complete(Result(error: CompressorError.videoResizeError))
-      return
-    }
-    
-    let videoComposition = AVMutableVideoComposition()
-    videoComposition.frameDuration = options.frameDuraton
-    
-    let videoTrackOrientation = getOrientationForTrack(videoTrack: clipVideoTrack)
-    
+  
+  typealias Scale = CGPoint
+  typealias CropOff = CGPoint
+  
+
+  fileprivate struct VideoTransformationParameters {
+    let targetSize: CGSize
+    let crop: CropOff
+    let scale: Scale
+  }
+  
+  fileprivate func getVideoTransformationParametersFor(_ originalSize: CGSize, cropPerCent: Crop, resizeContentMode: ResizeContentMode) -> VideoTransformationParameters {
     var cropOffX: CGFloat = 0.0
     var cropOffY: CGFloat = 0.0
     
     var scaleX: CGFloat = 1.0
     var scaleY: CGFloat = 1.0
     
-     
-    let cropPerCent = options.crop
-    
     let widthCropScale = (cropPerCent.left + cropPerCent.right) / 100
     let heightCropScale = (cropPerCent.top + cropPerCent.bottom) / 100
-  
-    let originalSize = originalSizeForVideoTrackOrinentation(videoTrackOrientation: videoTrackOrientation,
-                                                             naturalSize: clipVideoTrack.naturalSize)
     
     var targetSize = CGSize(width: (originalSize.width * (1.0 - widthCropScale)),
                             height: (originalSize.height * (1.0 - heightCropScale)))
@@ -194,7 +180,7 @@ extension CompressorManager {
     cropOffX = (originalSize.width * cropPerCent.left / 100.0)
     cropOffY = (originalSize.height * cropPerCent.top / 100.0)
     
-    switch options.resizeContentMode {
+    switch resizeContentMode {
     case .aspectFill(let targetSizeToFill):
       var targetAspectRatio = targetSize.height / targetSize.width
       let targetSizeToFillRatio = targetSizeToFill.height / targetSizeToFill.width
@@ -270,19 +256,51 @@ extension CompressorManager {
          scaleY = limits.videoMaxWidth  / targetSize.width
        }
     case .none:
-      fatalError("not implemented")
+      break
     }
     
     
     let renderSizeWidth = (targetSize.width * scaleX).rounded()
     let renderSizeHeight = (targetSize.height * scaleY).rounded()
     
-    
     cropOffX = cropOffX.rounded()
     cropOffY = cropOffY.rounded()
     
-    videoComposition.renderSize = CGSize(width: renderSizeWidth, height: renderSizeHeight)
+    let renderSize = CGSize(width: renderSizeWidth, height: renderSizeHeight)
     
+    
+    let transformation = VideoTransformationParameters(targetSize: renderSize,
+                                             crop: CompressorManager.CropOff(x: cropOffX, y: cropOffY),
+                                             scale: CompressorManager.Scale(x: scaleX, y: scaleY))
+    return transformation
+  }
+  
+  
+  fileprivate func performVideoResizeAt(_ url: URL, options: CompressorExportOptions?, complete: @escaping ResultCompleteHandler<URL, Error>) {
+    
+    let dirUrl = url.deletingLastPathComponent()
+    
+    let options = currentDefaultOptions + (options ?? EmptyCompressorExportOptions)
+    
+    let asset = AVAsset(url: url)
+    let composition = AVMutableComposition()
+    composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)
+        
+    guard let clipVideoTrack = asset.tracks(withMediaType: .video).first else {
+      complete(Result(error: CompressorError.videoResizeError))
+      return
+    }
+    
+    let videoComposition = AVMutableVideoComposition()
+    videoComposition.frameDuration = options.frameDuraton
+    
+    let videoTrackOrientation = getOrientationForTrack(videoTrack: clipVideoTrack)
+    let originalSize = originalSizeForVideoTrackOrinentation(videoTrackOrientation: videoTrackOrientation,
+    naturalSize: clipVideoTrack.naturalSize)
+    
+    let videoResizeTransformation = getVideoTransformationParametersFor(originalSize, cropPerCent: options.crop, resizeContentMode: options.resizeContentMode)
+    
+    videoComposition.renderSize = videoResizeTransformation.targetSize
     
     let targetSizeFilenameSuffix = "\(videoComposition.renderSize.width)x\(videoComposition.renderSize.height)"
     let filename = "\(options.resizedFilenameSuffix)\(url.lastPathComponent)"
@@ -301,10 +319,10 @@ extension CompressorManager {
     
     instruction.timeRange = timeRange
     
-    let finalTransform: CGAffineTransform = getTranformationFor(videoTrackOrientation,
+    let finalTransform: CGAffineTransform = getAffineTranformFor(videoTrackOrientation,
                                                                 naturalSize: clipVideoTrack.naturalSize,
-                                                                crop: CGPoint(x: cropOffX, y: cropOffY),
-                                                                scale: CGPoint(x: scaleX, y: scaleY))
+                                                                crop: videoResizeTransformation.crop,
+                                                                scale: videoResizeTransformation.scale)
     
     let transformer = AVMutableVideoCompositionLayerInstruction(assetTrack: clipVideoTrack)
     
