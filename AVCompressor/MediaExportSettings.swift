@@ -32,23 +32,18 @@ enum Result<T, Error: Swift.Error> {
 class LibraryAsset {
   var underlyingAsset: PHAsset
   var crop: UIEdgeInsets
-  var shouldUseAsDigitalGood: Bool
   
   init(asset: PHAsset, crop: UIEdgeInsets = UIEdgeInsets.zero, shouldUserOriginalSize: Bool = false) {
     self.underlyingAsset = asset
     self.crop = crop
-    self.shouldUseAsDigitalGood = shouldUserOriginalSize
   }
 }
 
-class ImageAsset {
-  var underlyingAsset: UIImage
-  var shouldUseAsDigitalGood: Bool
-  
-  init(asset: UIImage, isOriginalSize: Bool = false) {
-    self.underlyingAsset = asset
-    self.shouldUseAsDigitalGood = isOriginalSize
-  }
+struct CropParameters {
+  let top: CGFloat
+  let left: CGFloat
+  let bottom: CGFloat
+  let right: CGFloat
 }
 
 
