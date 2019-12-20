@@ -7,15 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA989BE023AD061D00EC954F /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA989BDF23AD061D00EC954F /* Result.swift */; };
+		EA989BE123AD061D00EC954F /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA989BDF23AD061D00EC954F /* Result.swift */; };
 		EAFFDDE0238827110042959D /* AVCompressor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAFFDDD6238827100042959D /* AVCompressor.framework */; };
 		EAFFDDE5238827110042959D /* AVCompressorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDDE4238827110042959D /* AVCompressorTests.swift */; };
 		EAFFDDE7238827110042959D /* AVCompressor.h in Headers */ = {isa = PBXBuildFile; fileRef = EAFFDDD9238827100042959D /* AVCompressor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EAFFDDF323882DD90042959D /* MediaLibraryExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDDF023882DD90042959D /* MediaLibraryExportService.swift */; };
-		EAFFDDF423882DD90042959D /* MediaLibraryExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDDF023882DD90042959D /* MediaLibraryExportService.swift */; };
-		EAFFDDF523882DD90042959D /* MediaLibraryExportServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDDF123882DD90042959D /* MediaLibraryExportServiceProtocol.swift */; };
-		EAFFDDF623882DD90042959D /* MediaLibraryExportServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDDF123882DD90042959D /* MediaLibraryExportServiceProtocol.swift */; };
-		EAFFDDF723882DD90042959D /* MediaExportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDDF223882DD90042959D /* MediaExportSettings.swift */; };
-		EAFFDDF823882DD90042959D /* MediaExportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDDF223882DD90042959D /* MediaExportSettings.swift */; };
 		EAFFDDFA2391407B0042959D /* CompressorOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDDF92391407B0042959D /* CompressorOptions.swift */; };
 		EAFFDDFB239141310042959D /* CompressorOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDDF92391407B0042959D /* CompressorOptions.swift */; };
 		EAFFDDFD239145A90042959D /* Compressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFFDDFC239145A90042959D /* Compressor.swift */; };
@@ -39,15 +35,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EA989BDF23AD061D00EC954F /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		EAFFDDD6238827100042959D /* AVCompressor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AVCompressor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAFFDDD9238827100042959D /* AVCompressor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVCompressor.h; sourceTree = "<group>"; };
 		EAFFDDDA238827100042959D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAFFDDDF238827110042959D /* AVCompressorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AVCompressorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAFFDDE4238827110042959D /* AVCompressorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCompressorTests.swift; sourceTree = "<group>"; };
 		EAFFDDE6238827110042959D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EAFFDDF023882DD90042959D /* MediaLibraryExportService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaLibraryExportService.swift; sourceTree = "<group>"; };
-		EAFFDDF123882DD90042959D /* MediaLibraryExportServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaLibraryExportServiceProtocol.swift; sourceTree = "<group>"; };
-		EAFFDDF223882DD90042959D /* MediaExportSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaExportSettings.swift; sourceTree = "<group>"; };
 		EAFFDDF92391407B0042959D /* CompressorOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompressorOptions.swift; sourceTree = "<group>"; };
 		EAFFDDFC239145A90042959D /* Compressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compressor.swift; sourceTree = "<group>"; };
 		EAFFDDFF239147A90042959D /* CompressorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompressorManager.swift; sourceTree = "<group>"; };
@@ -95,9 +89,6 @@
 		EAFFDDD8238827100042959D /* AVCompressor */ = {
 			isa = PBXGroup;
 			children = (
-				EAFFDDF223882DD90042959D /* MediaExportSettings.swift */,
-				EAFFDDF023882DD90042959D /* MediaLibraryExportService.swift */,
-				EAFFDDF123882DD90042959D /* MediaLibraryExportServiceProtocol.swift */,
 				EAFFDDD9238827100042959D /* AVCompressor.h */,
 				EAFFDDDA238827100042959D /* Info.plist */,
 				EAFFDDF92391407B0042959D /* CompressorOptions.swift */,
@@ -105,6 +96,7 @@
 				EAFFDDFF239147A90042959D /* CompressorManager.swift */,
 				EAFFDE022391902D0042959D /* CompressorError.swift */,
 				EAFFDE05239197030042959D /* PhotoLibraryAsset.swift */,
+				EA989BDF23AD061D00EC954F /* Result.swift */,
 			);
 			path = AVCompressor;
 			sourceTree = "<group>";
@@ -227,10 +219,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAFFDDF723882DD90042959D /* MediaExportSettings.swift in Sources */,
+				EA989BE023AD061D00EC954F /* Result.swift in Sources */,
 				EAFFDE06239197030042959D /* PhotoLibraryAsset.swift in Sources */,
-				EAFFDDF523882DD90042959D /* MediaLibraryExportServiceProtocol.swift in Sources */,
-				EAFFDDF323882DD90042959D /* MediaLibraryExportService.swift in Sources */,
 				EAFFDE032391902D0042959D /* CompressorError.swift in Sources */,
 				EAFFDDFD239145A90042959D /* Compressor.swift in Sources */,
 				EAFFDE00239147A90042959D /* CompressorManager.swift in Sources */,
@@ -242,14 +232,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAFFDDF623882DD90042959D /* MediaLibraryExportServiceProtocol.swift in Sources */,
 				EAFFDDFB239141310042959D /* CompressorOptions.swift in Sources */,
 				EAFFDE01239147A90042959D /* CompressorManager.swift in Sources */,
-				EAFFDDF423882DD90042959D /* MediaLibraryExportService.swift in Sources */,
 				EAFFDDE5238827110042959D /* AVCompressorTests.swift in Sources */,
 				EAFFDDFE239145A90042959D /* Compressor.swift in Sources */,
+				EA989BE123AD061D00EC954F /* Result.swift in Sources */,
 				EAFFDE07239197030042959D /* PhotoLibraryAsset.swift in Sources */,
-				EAFFDDF823882DD90042959D /* MediaExportSettings.swift in Sources */,
 				EAFFDE042391902D0042959D /* CompressorError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
