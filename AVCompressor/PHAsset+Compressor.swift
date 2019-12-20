@@ -10,5 +10,9 @@ import Foundation
 import Photos
 
 extension Compressor where Base: PHAsset {
-  
+  func export(with options: CompressorExportOptions?, complete: @escaping ResultCompleteHandler<URL, Error>) {
+    let options = CompressorManager.shared.currentDefaultOptions + (options ?? EmptyCompressorExportOptions)
+    
+    CompressorManager.shared.exportVideoAsset(base, options: options, complete: complete)
+  }
 }

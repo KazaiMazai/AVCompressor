@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Photos
 
 public final class Compressor<Base> {
   public let base: Base
@@ -26,3 +27,6 @@ public extension CompressorСompatible {
   }
 }
 
+extension PHAsset: CompressorСompatible {
+  
+}
