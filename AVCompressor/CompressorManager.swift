@@ -132,7 +132,7 @@ public class CompressorManager {
     return originalSize
   }
   
-  func resizeVideoAt(_ url: URL, /*cropPerCent: UIEdgeInsets,  *//*settings: MediaExportSettings,*/ options: CompressorExportOptions?, complete: @escaping ResultCompleteHandler<URL, Error>) {
+  func resizeVideoAt(_ url: URL, options: CompressorExportOptions?, complete: @escaping ResultCompleteHandler<URL, Error>) {
     
     let dirUrl = url.deletingLastPathComponent()
     
