@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+enum VideoOrientation {
+  case up
+  case down
+  case left
+  case right
+}
