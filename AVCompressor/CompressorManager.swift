@@ -93,7 +93,7 @@ extension CompressorManager {
     let composition = AVMutableComposition()
     composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)
         
-    guard let clipVideoTrack = asset.tracks(withMediaType: .video).first else {
+    guard let videoTrack = asset.tracks(withMediaType: .video).first else {
       complete(Result(error: CompressorError.videoResizeError))
       return
     }
@@ -101,18 +101,15 @@ extension CompressorManager {
     let videoComposition = AVMutableVideoComposition()
     videoComposition.frameDuration = options.frameDuraton
     
-    let videoTrackOrientation = clipVideoTrack.orientationForPreferredTransform
-    let originalSize = clipVideoTrack.originalSizeForOrientation
+    let originalSize = videoTrack.originalSizeForOrientation
     
     let composer = VideoTransformationComposer(originalSize: originalSize,
                                                cropPerCent: options.crop,
                                                resizeContentMode: options.resizeContentMode)
+    
+    let videoAffineTransform = videoTrack.affineTransformFor(crop: composer.transformationParameters.crop,
+                                                           scale: composer.transformationParameters.scale)
      
-    let finalTransform: CGAffineTransform = CGAffineTransform(videoTrackOrientation,
-                                                                naturalSize: clipVideoTrack.naturalSize,
-                                                                crop: composer.transformationParameters.crop,
-                                                                scale: composer.transformationParameters.scale)
-
 
     videoComposition.renderSize = composer.transformationParameters.targetSize
     
@@ -134,9 +131,9 @@ extension CompressorManager {
     instruction.timeRange = timeRange
     
     
-    let transformer = AVMutableVideoCompositionLayerInstruction(assetTrack: clipVideoTrack)
+    let transformer = AVMutableVideoCompositionLayerInstruction(assetTrack: videoTrack)
     
-    transformer.setTransform(finalTransform, at: CMTime.zero)
+    transformer.setTransform(videoAffineTransform, at: CMTime.zero)
     instruction.layerInstructions = [transformer]
     videoComposition.instructions = [instruction]
     
