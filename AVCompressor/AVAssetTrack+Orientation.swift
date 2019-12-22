@@ -8,8 +8,8 @@
 
 import AVKit
 
-internal extension AVAssetTrack {
-  func orientation() -> UIImage.Orientation {
+extension AVAssetTrack {
+  var orientation: UIImage.Orientation {
     let size = naturalSize
     let txf = preferredTransform
     
@@ -27,8 +27,8 @@ internal extension AVAssetTrack {
     return .up
   }
   
-  func originalSizeForVideoTrackOrinentation() -> CGSize {
-    let videoTrackOrientation = orientation()
+  var originalSizeForVideoTrackOrinentation: CGSize {
+    let videoTrackOrientation = orientation
     
     let videoMinDimension = min(naturalSize.width, naturalSize.height)
     let videoMaxDimension = max(naturalSize.width, naturalSize.height)

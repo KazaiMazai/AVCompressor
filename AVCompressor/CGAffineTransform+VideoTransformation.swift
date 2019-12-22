@@ -8,7 +8,7 @@
 
 import Foundation
   
-internal extension CGAffineTransform {
+extension CGAffineTransform {
   init(_ videoTrackOrientation: UIImage.Orientation, naturalSize: CGSize, crop: CropOff, scale: Scale) {
     let cropOffX = crop.x
     let cropOffY = crop.y

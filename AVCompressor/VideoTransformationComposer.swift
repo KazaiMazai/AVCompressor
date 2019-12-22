@@ -17,14 +17,14 @@ struct VideoTransformationParameters {
   let scale: Scale
 }
 
-struct VideoTransformationComposer {
+class VideoTransformationComposer {
   let originalSize: CGSize
   let cropPerCent: Crop
   let resizeContentMode: ResizeContentMode
   
-  var transformationParameters: VideoTransformationParameters {
+  lazy var transformationParameters: VideoTransformationParameters = {
     return getVideoTransformationParametersFor(originalSize, cropPerCent: cropPerCent, resizeContentMode: resizeContentMode)
-  }
+  }()
    
   init(originalSize: CGSize, cropPerCent: Crop, resizeContentMode: ResizeContentMode) {
     self.originalSize = originalSize
