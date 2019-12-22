@@ -9,7 +9,7 @@
 import Foundation
   
 extension CGAffineTransform {
-  init(_ videoTrackOrientation: UIImage.Orientation, naturalSize: CGSize, crop: CropOff, scale: Scale) {
+  init(_ videoTrackOrientation: VideoOrientation, naturalSize: CGSize, crop: CropOff, scale: Scale) {
     let cropOffX = crop.x
     let cropOffY = crop.y
     
@@ -36,8 +36,6 @@ extension CGAffineTransform {
       let t1 = CGAffineTransform(translationX: 0 - cropOffX, y: 0 - cropOffY );
       let t2 = CGAffineTransform(rotationAngle: 0.0)
       finalTransform = (t2).concatenating(t1).concatenating(t3)
-    default:
-      finalTransform = CGAffineTransform(rotationAngle: 0.0)
     }
     
     self = finalTransform

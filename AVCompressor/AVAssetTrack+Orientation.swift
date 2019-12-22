@@ -9,7 +9,7 @@
 import AVKit
 
 extension AVAssetTrack {
-  var orientation: UIImage.Orientation {
+  var orientationForPreferredTransform: VideoOrientation {
     let size = naturalSize
     let txf = preferredTransform
     
@@ -24,11 +24,12 @@ extension AVAssetTrack {
     if txf.tx == 0 && txf.ty == size.width {
       return .down
     }
+    
     return .up
   }
   
-  var originalSizeForVideoTrackOrinentation: CGSize {
-    let videoTrackOrientation = orientation
+  var originalSizeForOrientation: CGSize {
+    let videoTrackOrientation = orientationForPreferredTransform
     
     let videoMinDimension = min(naturalSize.width, naturalSize.height)
     let videoMaxDimension = max(naturalSize.width, naturalSize.height)
@@ -40,8 +41,6 @@ extension AVAssetTrack {
       originalSize = CGSize(width: videoMinDimension, height: videoMaxDimension)
     case .left, .right:
       originalSize = naturalSize
-    default:
-      break
     }
     
     return originalSize
