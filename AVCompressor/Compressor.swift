@@ -24,9 +24,11 @@ public protocol CompressorСompatible {
 public extension CompressorСompatible {
   var compressor: Compressor<Self> {
     return Compressor(self)
-  }
+  }  
 }
 
-extension PHAsset: CompressorСompatible {
-  
-}
+extension PHAsset: CompressorСompatible { }
+
+extension AVAssetTrack: CompressorСompatible { }
+
+extension CGAffineTransform: CompressorСompatible { }

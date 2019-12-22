@@ -82,200 +82,7 @@ extension CompressorManager {
       }
     })
   }
-  
-  fileprivate func getOrientationForTrack(videoTrack: AVAssetTrack) -> UIImage.Orientation {
-    let size = videoTrack.naturalSize
-    let txf = videoTrack.preferredTransform
-    
-    if size.width == txf.tx && size.height == txf.ty {
-      return .left
-    }
-    
-    if txf.tx == 0 && txf.ty == 0 {
-      return .right
-    }
-    
-    if txf.tx == 0 && txf.ty == size.width {
-      return .down
-    }
-    return .up
-  }
-  
-  fileprivate func getAffineTranformFor(_ videoTrackOrientation: UIImage.Orientation, naturalSize: CGSize, crop: CGPoint, scale: CGPoint) -> CGAffineTransform {
-    let cropOffX = crop.x
-    let cropOffY = crop.y
-    
-    let scaleX = scale.x
-    let scaleY = scale.y
-    
-    let t3 = CGAffineTransform(scaleX: scaleX, y: scaleY)
-    
-    let finalTransform: CGAffineTransform
-    switch videoTrackOrientation {
-    case .up:
-      let t1 = CGAffineTransform(translationX: naturalSize.height - cropOffX, y: 0.0 - cropOffY)
-      let t2 = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
-      finalTransform = (t2).concatenating(t1).concatenating(t3)
-    case .down:
-      let t1 = CGAffineTransform(translationX: 0 - cropOffX, y: naturalSize.width - cropOffY) // not fixed width is the real height in upside down
-      let t2 = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
-      finalTransform = (t2).concatenating(t1).concatenating(t3)
-    case .left:
-      let t1 = CGAffineTransform(translationX: naturalSize.width - cropOffX, y: naturalSize.height - cropOffY)
-      let t2 = CGAffineTransform(rotationAngle: CGFloat.pi)
-      finalTransform = (t2).concatenating(t1).concatenating(t3)
-    case .right:
-      let t1 = CGAffineTransform(translationX: 0 - cropOffX, y: 0 - cropOffY );
-      let t2 = CGAffineTransform(rotationAngle: 0.0)
-      finalTransform = (t2).concatenating(t1).concatenating(t3)
-    default:
-      finalTransform = CGAffineTransform(rotationAngle: 0.0)
-    }
-    
-    return finalTransform
-  }
-  
-  fileprivate func originalSizeForVideoTrackOrinentation(videoTrackOrientation: UIImage.Orientation, naturalSize: CGSize) -> CGSize {
-     let videoMinDimension = min(naturalSize.width, naturalSize.height)
-     let videoMaxDimension = max(naturalSize.width, naturalSize.height)
-     
-     
-     var originalSize = CGSize.zero
-     switch videoTrackOrientation {
-     case .up, .down:
-       originalSize = CGSize(width: videoMinDimension, height: videoMaxDimension)
-     case .left, .right:
-       originalSize = naturalSize
-     default:
-       break
-     }
-     
-     return originalSize
-   }
-  
-  
-  typealias Scale = CGPoint
-  typealias CropOff = CGPoint
-  
-
-  fileprivate struct VideoTransformationParameters {
-    let targetSize: CGSize
-    let crop: CropOff
-    let scale: Scale
-  }
-  
-  fileprivate func getVideoTransformationParametersFor(_ originalSize: CGSize, cropPerCent: Crop, resizeContentMode: ResizeContentMode) -> VideoTransformationParameters {
-    var cropOffX: CGFloat = 0.0
-    var cropOffY: CGFloat = 0.0
-    
-    var scaleX: CGFloat = 1.0
-    var scaleY: CGFloat = 1.0
-    
-    let widthCropScale = (cropPerCent.left + cropPerCent.right) / 100
-    let heightCropScale = (cropPerCent.top + cropPerCent.bottom) / 100
-    
-    var targetSize = CGSize(width: (originalSize.width * (1.0 - widthCropScale)),
-                            height: (originalSize.height * (1.0 - heightCropScale)))
-    
-    cropOffX = (originalSize.width * cropPerCent.left / 100.0)
-    cropOffY = (originalSize.height * cropPerCent.top / 100.0)
-    
-    switch resizeContentMode {
-    case .aspectFill(let targetSizeToFill):
-      var targetAspectRatio = targetSize.height / targetSize.width
-      let targetSizeToFillRatio = targetSizeToFill.height / targetSizeToFill.width
-      
-      if targetAspectRatio > targetSizeToFillRatio {
-        let targetHeight = (targetSize.width * targetSizeToFillRatio)
-        cropOffY += ((targetSize.height - targetHeight) / 2)
-        targetAspectRatio = targetSizeToFillRatio
-        targetSize = CGSize(width: targetSize.width, height: targetHeight)
-        
-        
-        scaleX = targetSizeToFill.width  / targetSize.width
-        scaleY = targetSizeToFill.width  / targetSize.width
-      }
-      
-      if targetAspectRatio < targetSizeToFillRatio {
-        let targetWidth = targetSize.height / targetSizeToFillRatio
-        cropOffX += ((targetSize.width - targetWidth) / 2)
-        targetAspectRatio = targetSizeToFillRatio
-        targetSize = CGSize(width: targetWidth, height: targetSize.height)
-        
-        scaleX = targetSizeToFill.height  / targetSize.height
-        scaleY = targetSizeToFill.height  / targetSize.height
-      }
-      
-    case .aspectFit(let targetSizeToFill):
-      var targetAspectRatio = targetSize.height / targetSize.width
-      let targetSizeToFillRatio = targetSizeToFill.height / targetSizeToFill.width
-      
-      if targetAspectRatio < targetSizeToFillRatio {
-        let targetHeight = (targetSize.width * targetSizeToFillRatio)
-        cropOffY -= ((targetSize.height - targetHeight) / 2)
-        targetAspectRatio = targetSizeToFillRatio
-        targetSize = CGSize(width: targetSize.width, height: targetHeight)
-        
-        
-        scaleX = targetSizeToFill.width  / targetSize.width
-        scaleY = targetSizeToFill.width  / targetSize.width
-      }
-      
-      if targetAspectRatio > targetSizeToFillRatio {
-        let targetWidth = targetSize.height / targetSizeToFillRatio
-        cropOffX -= ((targetSize.width - targetWidth) / 2)
-        targetAspectRatio = targetSizeToFillRatio
-        targetSize = CGSize(width: targetWidth, height: targetSize.height)
-        
-        scaleX = targetSizeToFill.height  / targetSize.height
-        scaleY = targetSizeToFill.height  / targetSize.height
-      }
-    case .aspectRatioBestFill(let limits):
-       var targetAspectRatio = targetSize.height / targetSize.width
-       if targetAspectRatio > limits.videoMaxPortraitAspectRatio {
-         let targetHeight = (targetSize.width * limits.videoMaxPortraitAspectRatio)
-         cropOffY += ((targetSize.height - targetHeight) / 2)
-         targetAspectRatio = limits.videoMaxPortraitAspectRatio
-         targetSize = CGSize(width: targetSize.width, height: targetHeight)
-       }
-       
-       if targetAspectRatio < limits.videoMinLandscapeAspectRatio {
-         let targetWidth = targetSize.height / limits.videoMinLandscapeAspectRatio
-         cropOffX = ((targetSize.width - targetWidth) / 2)
-         targetAspectRatio = limits.videoMinLandscapeAspectRatio
-         targetSize = CGSize(width: targetWidth, height: targetSize.height)
-       }
-       
-       if targetSize.width < limits.videoMinWidth {
-         scaleX = limits.videoMinWidth  / targetSize.width
-         scaleY = limits.videoMinWidth  / targetSize.width
-       }
-       
-       if targetSize.width > limits.videoMaxWidth {
-         scaleX = limits.videoMaxWidth  / targetSize.width
-         scaleY = limits.videoMaxWidth  / targetSize.width
-       }
-    case .none:
-      break
-    }
-    
-    
-    let renderSizeWidth = (targetSize.width * scaleX).rounded()
-    let renderSizeHeight = (targetSize.height * scaleY).rounded()
-    
-    cropOffX = cropOffX.rounded()
-    cropOffY = cropOffY.rounded()
-    
-    let renderSize = CGSize(width: renderSizeWidth, height: renderSizeHeight)
-    
-    
-    let transformation = VideoTransformationParameters(targetSize: renderSize,
-                                             crop: CompressorManager.CropOff(x: cropOffX, y: cropOffY),
-                                             scale: CompressorManager.Scale(x: scaleX, y: scaleY))
-    return transformation
-  }
-  
-  
+ 
   fileprivate func performVideoResizeAt(_ url: URL, options: CompressorExportOptions?, complete: @escaping ResultCompleteHandler<URL, Error>) {
     
     let dirUrl = url.deletingLastPathComponent()
@@ -294,13 +101,20 @@ extension CompressorManager {
     let videoComposition = AVMutableVideoComposition()
     videoComposition.frameDuration = options.frameDuraton
     
-    let videoTrackOrientation = getOrientationForTrack(videoTrack: clipVideoTrack)
-    let originalSize = originalSizeForVideoTrackOrinentation(videoTrackOrientation: videoTrackOrientation,
-    naturalSize: clipVideoTrack.naturalSize)
+    let videoTrackOrientation = clipVideoTrack.orientation()
+    let originalSize = clipVideoTrack.originalSizeForVideoTrackOrinentation()
     
-    let videoResizeTransformation = getVideoTransformationParametersFor(originalSize, cropPerCent: options.crop, resizeContentMode: options.resizeContentMode)
-    
-    videoComposition.renderSize = videoResizeTransformation.targetSize
+    let composer = VideoTransformationComposer(originalSize: originalSize,
+                                               cropPerCent: options.crop,
+                                               resizeContentMode: options.resizeContentMode)
+     
+    let finalTransform: CGAffineTransform = CGAffineTransform(videoTrackOrientation,
+                                                                naturalSize: clipVideoTrack.naturalSize,
+                                                                crop: composer.transformationParameters.crop,
+                                                                scale: composer.transformationParameters.scale)
+
+
+    videoComposition.renderSize = composer.transformationParameters.targetSize
     
     let targetSizeFilenameSuffix = "\(videoComposition.renderSize.width)x\(videoComposition.renderSize.height)"
     let filename = "\(options.resizedFilenameSuffix)\(url.lastPathComponent)"
@@ -319,10 +133,6 @@ extension CompressorManager {
     
     instruction.timeRange = timeRange
     
-    let finalTransform: CGAffineTransform = getAffineTranformFor(videoTrackOrientation,
-                                                                naturalSize: clipVideoTrack.naturalSize,
-                                                                crop: videoResizeTransformation.crop,
-                                                                scale: videoResizeTransformation.scale)
     
     let transformer = AVMutableVideoCompositionLayerInstruction(assetTrack: clipVideoTrack)
     
