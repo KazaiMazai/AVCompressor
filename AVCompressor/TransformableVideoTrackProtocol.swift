@@ -6,7 +6,7 @@
 //  Copyright © 2019 kazaimazai. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol TransformableVideoTrack {
   var naturalSize: CGSize { get }
