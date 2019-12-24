@@ -101,7 +101,7 @@ extension CompressorManager {
     let videoComposition = AVMutableVideoComposition()
     videoComposition.frameDuration = options.frameDuraton
     
-    let originalSize = videoTrack.originalSizeForOrientation
+    let originalSize = videoTrack.orientationAdjustedSize
     
     let composer = VideoTransformationComposer(originalSize: originalSize,
                                                cropPerCent: options.crop,
@@ -167,3 +167,5 @@ extension CompressorManager {
     })
   }
 }
+
+
