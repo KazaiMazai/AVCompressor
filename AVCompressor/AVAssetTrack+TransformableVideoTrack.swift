@@ -10,21 +10,21 @@ import AVKit
 
 extension AVAssetTrack {
   var orientationAdjustedSize: CGSize {
-     let videoTrackOrientation = orientationForPreferredTransform
-     
-     var originalSize = CGSize.zero
-     switch videoTrackOrientation {
-     case .up, .down:
-       let videoMinDimension = min(naturalSize.width, naturalSize.height)
-       let videoMaxDimension = max(naturalSize.width, naturalSize.height)
+    let videoTrackOrientation = orientationForPreferredTransform
+    
+    var originalSize = CGSize.zero
+    switch videoTrackOrientation {
+    case .up, .down:
+      let videoMinDimension = min(naturalSize.width, naturalSize.height)
+      let videoMaxDimension = max(naturalSize.width, naturalSize.height)
       
-       originalSize = CGSize(width: videoMinDimension, height: videoMaxDimension)
-     case .left, .right:
-       originalSize = naturalSize
-     }
-     
-     return originalSize
-   }
+      originalSize = CGSize(width: videoMinDimension, height: videoMaxDimension)
+    case .left, .right:
+      originalSize = naturalSize
+    }
+    
+    return originalSize
+  }
 }
 
 extension AVAssetTrack: TransformableVideoTrack {

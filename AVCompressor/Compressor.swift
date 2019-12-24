@@ -28,4 +28,4 @@ public extension CompressorСompatible {
 }
 
 extension PHAsset: CompressorСompatible { }
- 
+

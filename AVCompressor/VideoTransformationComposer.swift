@@ -25,13 +25,13 @@ class VideoTransformationComposer {
   lazy var transformationParameters: VideoTransformationParameters = {
     return getVideoTransformationParametersFor(originalSize, cropPerCent: cropPerCent, resizeContentMode: resizeContentMode)
   }()
-   
+  
   init(originalSize: CGSize, cropPerCent: Crop, resizeContentMode: ResizeContentMode) {
     self.originalSize = originalSize
     self.cropPerCent = cropPerCent
     self.resizeContentMode = resizeContentMode
   }
-
+  
   fileprivate func getVideoTransformationParametersFor(_ originalSize: CGSize, cropPerCent: Crop, resizeContentMode: ResizeContentMode) -> VideoTransformationParameters {
     var cropOffX: CGFloat = 0.0
     var cropOffY: CGFloat = 0.0

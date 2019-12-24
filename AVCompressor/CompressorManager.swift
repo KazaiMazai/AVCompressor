@@ -13,7 +13,7 @@ public class CompressorManager {
   public static let shared = CompressorManager()
   
   public var defaultOptions = EmptyCompressorExportOptions
-
+  
   var currentDefaultOptions: CompressorExportOptions {
     return [] + defaultOptions
   }
@@ -29,7 +29,7 @@ public class CompressorManager {
       }
     }
   }
-
+  
   func resizeVideoFileAt(_ url: URL, options: CompressorExportOptions?, complete: @escaping ResultCompleteHandler<URL, Error>) {
     performVideoResizeAt(url, options: options, complete: complete)
   }
@@ -82,7 +82,7 @@ extension CompressorManager {
       }
     })
   }
- 
+  
   fileprivate func performVideoResizeAt(_ url: URL, options: CompressorExportOptions?, complete: @escaping ResultCompleteHandler<URL, Error>) {
     
     let dirUrl = url.deletingLastPathComponent()
@@ -92,7 +92,7 @@ extension CompressorManager {
     let asset = AVAsset(url: url)
     let composition = AVMutableComposition()
     composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)
-        
+    
     guard let videoTrack = asset.tracks(withMediaType: .video).first else {
       complete(Result(error: CompressorError.videoResizeError))
       return
@@ -108,18 +108,18 @@ extension CompressorManager {
                                                resizeContentMode: options.resizeContentMode)
     
     let videoAffineTransform = videoTrack.affineTransformFor(crop: composer.transformationParameters.crop,
-                                                           scale: composer.transformationParameters.scale)
-     
-
+                                                             scale: composer.transformationParameters.scale)
+    
+    
     videoComposition.renderSize = composer.transformationParameters.targetSize
     
     let targetSizeFilenameSuffix = "\(videoComposition.renderSize.width)x\(videoComposition.renderSize.height)"
     let filename = "\(options.resizedFilenameSuffix)\(url.lastPathComponent)"
     
     let name = options.shouldAddTargetSizeToFilename ?
-        "\(targetSizeFilenameSuffix)\(filename)" :
-        filename
-     
+      "\(targetSizeFilenameSuffix)\(filename)" :
+    filename
+    
     let outputURL = dirUrl.appendingPathComponent(name)
     try? FileManager.default.removeItem(at: outputURL)
     

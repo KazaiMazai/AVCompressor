@@ -121,8 +121,8 @@ public extension Collection where Iterator.Element == CompressorExportOptionsIte
   var resizeContentMode: ResizeContentMode {
     guard let resizeContentMode = lastMatchIgnoringAssociatedValue(.resizeContentMode(.none)),
       case .resizeContentMode(let resize) = resizeContentMode
-    else {
-      return .none
+      else {
+        return .none
     }
     
     return resize
@@ -171,8 +171,8 @@ public extension Collection where Iterator.Element == CompressorExportOptionsIte
   var exportFileType: AVFileType {
     guard let fileTypeInfo = lastMatchIgnoringAssociatedValue(.exportFileType(AVFileType.mp4)),
       case .exportFileType(let filetype) = fileTypeInfo
-    else {
-      return AVFileType.mp4
+      else {
+        return AVFileType.mp4
     }
     
     return filetype
@@ -202,7 +202,7 @@ public extension Collection where Iterator.Element == CompressorExportOptionsIte
     guard let shouldAddTargetSizeToFilenameInfo = lastMatchIgnoringAssociatedValue(.shouldAddTargetSizeToFilename(true)),
       case .shouldAddTargetSizeToFilename(let boolValue) = shouldAddTargetSizeToFilenameInfo
       else {
-        return true
+        return true               
     }
     
     return boolValue
@@ -211,7 +211,7 @@ public extension Collection where Iterator.Element == CompressorExportOptionsIte
   var trim: CMTimeRange {
     guard let trimOptions = lastMatchIgnoringAssociatedValue(.trim(CMTimeRange(start: CMTime.zero, duration: CMTime.zero))),
       case .trim(let trimTimeRange) = trimOptions
-    else {
+      else {
         let duration = Double.infinity
         let infiniteDurationTime = CMTime(seconds: duration, preferredTimescale: preferredTimescale)
         
