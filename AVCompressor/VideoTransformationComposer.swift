@@ -6,7 +6,7 @@
 //  Copyright © 2019 kazaimazai. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 typealias Scale = CGPoint
 typealias CropOff = CGPoint
@@ -64,7 +64,7 @@ class VideoTransformationComposer {
         scaleY = targetSizeToFill.width  / targetSize.width
       }
       
-      if targetAspectRatio < targetSizeToFillRatio {
+      if targetAspectRatio <= targetSizeToFillRatio {
         let targetWidth = targetSize.height / targetSizeToFillRatio
         cropOffX += ((targetSize.width - targetWidth) / 2)
         targetAspectRatio = targetSizeToFillRatio
@@ -89,7 +89,7 @@ class VideoTransformationComposer {
         scaleY = targetSizeToFill.width  / targetSize.width
       }
       
-      if targetAspectRatio > targetSizeToFillRatio {
+      if targetAspectRatio >= utargetSizeToFillRatio {
         let targetWidth = targetSize.height / targetSizeToFillRatio
         cropOffX -= ((targetSize.width - targetWidth) / 2)
         targetAspectRatio = targetSizeToFillRatio
