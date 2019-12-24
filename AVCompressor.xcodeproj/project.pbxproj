@@ -13,8 +13,6 @@
 		EA989BE423AD100400EC954F /* PHAsset+Compressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA989BE223AD100400EC954F /* PHAsset+Compressor.swift */; };
 		EA989BE623AFE5CA00EC954F /* VideoTransformationComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA989BE523AFE5CA00EC954F /* VideoTransformationComposer.swift */; };
 		EA989BE723AFE5CA00EC954F /* VideoTransformationComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA989BE523AFE5CA00EC954F /* VideoTransformationComposer.swift */; };
-		EA989BE923B01B5800EC954F /* CGAffineTransform+VideoTransformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA989BE823B01B5800EC954F /* CGAffineTransform+VideoTransformation.swift */; };
-		EA989BEA23B01B5800EC954F /* CGAffineTransform+VideoTransformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA989BE823B01B5800EC954F /* CGAffineTransform+VideoTransformation.swift */; };
 		EA989BEC23B01F3D00EC954F /* AVAssetTrack+Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA989BEB23B01F3D00EC954F /* AVAssetTrack+Orientation.swift */; };
 		EA989BED23B01F3D00EC954F /* AVAssetTrack+Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA989BEB23B01F3D00EC954F /* AVAssetTrack+Orientation.swift */; };
 		EA989BEF23B0215800EC954F /* VideoOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA989BEE23B0215800EC954F /* VideoOrientation.swift */; };
@@ -46,7 +44,6 @@
 		EA989BDF23AD061D00EC954F /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		EA989BE223AD100400EC954F /* PHAsset+Compressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAsset+Compressor.swift"; sourceTree = "<group>"; };
 		EA989BE523AFE5CA00EC954F /* VideoTransformationComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTransformationComposer.swift; sourceTree = "<group>"; };
-		EA989BE823B01B5800EC954F /* CGAffineTransform+VideoTransformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGAffineTransform+VideoTransformation.swift"; sourceTree = "<group>"; };
 		EA989BEB23B01F3D00EC954F /* AVAssetTrack+Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVAssetTrack+Orientation.swift"; sourceTree = "<group>"; };
 		EA989BEE23B0215800EC954F /* VideoOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoOrientation.swift; sourceTree = "<group>"; };
 		EAFFDDD6238827100042959D /* AVCompressor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AVCompressor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,7 +107,6 @@
 				EA989BDF23AD061D00EC954F /* Result.swift */,
 				EA989BE223AD100400EC954F /* PHAsset+Compressor.swift */,
 				EA989BE523AFE5CA00EC954F /* VideoTransformationComposer.swift */,
-				EA989BE823B01B5800EC954F /* CGAffineTransform+VideoTransformation.swift */,
 				EA989BEB23B01F3D00EC954F /* AVAssetTrack+Orientation.swift */,
 				EA989BEE23B0215800EC954F /* VideoOrientation.swift */,
 			);
@@ -242,7 +238,6 @@
 				EAFFDE00239147A90042959D /* CompressorManager.swift in Sources */,
 				EAFFDDFA2391407B0042959D /* CompressorOptions.swift in Sources */,
 				EA989BEF23B0215800EC954F /* VideoOrientation.swift in Sources */,
-				EA989BE923B01B5800EC954F /* CGAffineTransform+VideoTransformation.swift in Sources */,
 				EA989BE623AFE5CA00EC954F /* VideoTransformationComposer.swift in Sources */,
 				EA989BEC23B01F3D00EC954F /* AVAssetTrack+Orientation.swift in Sources */,
 			);
@@ -254,7 +249,6 @@
 			files = (
 				EAFFDDFB239141310042959D /* CompressorOptions.swift in Sources */,
 				EAFFDE01239147A90042959D /* CompressorManager.swift in Sources */,
-				EA989BEA23B01B5800EC954F /* CGAffineTransform+VideoTransformation.swift in Sources */,
 				EAFFDDE5238827110042959D /* AVCompressorTests.swift in Sources */,
 				EA989BF023B0215800EC954F /* VideoOrientation.swift in Sources */,
 				EA989BED23B01F3D00EC954F /* AVAssetTrack+Orientation.swift in Sources */,

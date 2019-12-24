@@ -28,7 +28,4 @@ public extension CompressorСompatible {
 }
 
 extension PHAsset: CompressorСompatible { }
-
-extension AVAssetTrack: CompressorСompatible { }
-
-extension CGAffineTransform: CompressorСompatible { }
+ 
