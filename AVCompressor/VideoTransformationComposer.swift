@@ -89,7 +89,7 @@ class VideoTransformationComposer {
         scaleY = targetSizeToFill.width  / targetSize.width
       }
       
-      if targetAspectRatio >= utargetSizeToFillRatio {
+      if targetAspectRatio >= targetSizeToFillRatio {
         let targetWidth = targetSize.height / targetSizeToFillRatio
         cropOffX -= ((targetSize.width - targetWidth) / 2)
         targetAspectRatio = targetSizeToFillRatio
