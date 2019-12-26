@@ -9,9 +9,8 @@
 import XCTest
 @testable import AVCompressor
 
-
 class VideoTransformationComposerAspectFillOnlyResizeTests: ParametrizedTestCase {
-  func aspectFill(originalSize: CGSize, targetSize: CGSize) {
+  func methodToTestWithParameters(originalSize: CGSize, targetSize: CGSize) {
     
     let resizeContentMode = ResizeContentMode.aspectFill(targetSize)
     
@@ -44,6 +43,9 @@ class VideoTransformationComposerAspectFillOnlyResizeTests: ParametrizedTestCase
     XCTAssertEqual(totalCropX * totalCropY, 0)
     
     
+    //when aspect fill, crop offset should be always >= 0
+    XCTAssertGreaterThanOrEqual(resultOffsetX, 0)
+    XCTAssertGreaterThanOrEqual(resultOffsetY, 0)
   }
   
   override class func _qck_testMethodSelectors() -> [_QuickSelectorWrapper] {
@@ -70,7 +72,7 @@ class VideoTransformationComposerAspectFillOnlyResizeTests: ParametrizedTestCase
     
     return testsParameters.map { parameter in
       /// first we wrap our test method in block that takes TestCase instance
-      let block: @convention(block) (Self) -> Void = { $0.aspectFill(originalSize: parameter.originalSize, targetSize: parameter.targetSize) }
+      let block: @convention(block) (Self) -> Void = { $0.methodToTestWithParameters(originalSize: parameter.originalSize, targetSize: parameter.targetSize) }
       /// with help of ObjC runtime we add new test method to class
       let implementation = imp_implementationWithBlock(block)
       let selectorName = "test_\(parameter)"
@@ -84,7 +86,7 @@ class VideoTransformationComposerAspectFillOnlyResizeTests: ParametrizedTestCase
 
 
 class VideoTransformationComposerAspectFillOnlyCropTests: ParametrizedTestCase {
-  func aspectFill(originalSize: CGSize, crop: Crop) {
+  func methodToTestWithParameters(originalSize: CGSize, crop: Crop) {
     
     //only crop, no additional resize to fill occur
     let targetWidth = (originalSize.width * (1.0 - (crop.left + crop.right) / 100.0)).rounded()
@@ -156,7 +158,7 @@ class VideoTransformationComposerAspectFillOnlyCropTests: ParametrizedTestCase {
     
     return testsParameters.map { parameter in
       /// first we wrap our test method in block that takes TestCase instance
-      let block: @convention(block) (Self) -> Void = { $0.aspectFill(originalSize: parameter.originalSize, crop: parameter.crop) }
+      let block: @convention(block) (Self) -> Void = { $0.methodToTestWithParameters(originalSize: parameter.originalSize, crop: parameter.crop) }
       /// with help of ObjC runtime we add new test method to class
       let implementation = imp_implementationWithBlock(block)
       
@@ -170,7 +172,7 @@ class VideoTransformationComposerAspectFillOnlyCropTests: ParametrizedTestCase {
 }
 
 class VideoTransformationComposerAspectFillResizeWithCropTests: ParametrizedTestCase {
-  func aspectFill(originalSize: CGSize, targetSize: CGSize, crop: Crop) {
+  func methodToTestWithParameters(originalSize: CGSize, targetSize: CGSize, crop: Crop) {
     //step1 - perform crop only transformation
     
     let cropTargetWidth = (originalSize.width * (1.0 - (crop.left + crop.right) / 100.0)).rounded()
@@ -301,7 +303,7 @@ class VideoTransformationComposerAspectFillResizeWithCropTests: ParametrizedTest
     
     return testsParameters.map { parameter in
       /// first we wrap our test method in block that takes TestCase instance
-      let block: @convention(block) (Self) -> Void = { $0.aspectFill(originalSize: parameter.originalSize, targetSize: parameter.targetSize, crop: parameter.crop) }
+      let block: @convention(block) (Self) -> Void = { $0.methodToTestWithParameters(originalSize: parameter.originalSize, targetSize: parameter.targetSize, crop: parameter.crop) }
       /// with help of ObjC runtime we add new test method to class
       let implementation = imp_implementationWithBlock(block)
       
