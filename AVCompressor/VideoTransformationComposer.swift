@@ -83,7 +83,7 @@ class VideoTransformationComposer {
       
       if targetAspectRatio < targetSizeToFillRatio {
         let targetHeight = (targetSize.width * targetSizeToFillRatio)
-        cropOffY -= ((targetSize.height - targetHeight) / 2)
+        cropOffY += ((targetSize.height - targetHeight) / 2)
         targetAspectRatio = targetSizeToFillRatio
         targetSize = CGSize(width: targetSize.width, height: targetHeight)
         
@@ -94,7 +94,7 @@ class VideoTransformationComposer {
       
       if targetAspectRatio >= targetSizeToFillRatio {
         let targetWidth = targetSize.height / targetSizeToFillRatio
-        cropOffX -= ((targetSize.width - targetWidth) / 2)
+        cropOffX += ((targetSize.width - targetWidth) / 2)
         targetAspectRatio = targetSizeToFillRatio
         targetSize = CGSize(width: targetWidth, height: targetSize.height)
         
