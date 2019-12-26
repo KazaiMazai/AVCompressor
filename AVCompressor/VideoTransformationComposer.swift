@@ -73,6 +73,9 @@ class VideoTransformationComposer {
         scaleX = targetSizeToFill.height  / targetSize.height
         scaleY = targetSizeToFill.height  / targetSize.height
       }
+       
+      cropOffX = cropOffX.rounded()
+      cropOffY = cropOffY.rounded()   
       
     case .aspectFit(let targetSizeToFill):
       var targetAspectRatio = targetSize.height / targetSize.width
@@ -98,6 +101,10 @@ class VideoTransformationComposer {
         scaleX = targetSizeToFill.height  / targetSize.height
         scaleY = targetSizeToFill.height  / targetSize.height
       }
+      
+      cropOffX = cropOffX.rounded()
+      cropOffY = cropOffY.rounded()
+      
     case .aspectRatioBestFill(let limits):
       var targetAspectRatio = targetSize.height / targetSize.width
       if targetAspectRatio > limits.videoMaxPortraitAspectRatio {
@@ -123,16 +130,15 @@ class VideoTransformationComposer {
         scaleX = limits.videoMaxWidth  / targetSize.width
         scaleY = limits.videoMaxWidth  / targetSize.width
       }
+      
+      cropOffX = cropOffX.rounded()
+      cropOffY = cropOffY.rounded()
     case .none:
       break
     }
     
-    
     let renderSizeWidth = (targetSize.width * scaleX).rounded()
     let renderSizeHeight = (targetSize.height * scaleY).rounded()
-    
-    cropOffX = cropOffX.rounded()
-    cropOffY = cropOffY.rounded()
     
     let renderSize = CGSize(width: renderSizeWidth, height: renderSizeHeight)
     
