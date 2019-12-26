@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		EA5B64A323B2512100E86EAF /* TransformableVideoTrackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5B64A223B2512100E86EAF /* TransformableVideoTrackProtocol.swift */; };
 		EA5B64A423B2512100E86EAF /* TransformableVideoTrackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5B64A223B2512100E86EAF /* TransformableVideoTrackProtocol.swift */; };
-		EA5B64A623B2613800E86EAF /* VideoTransformationComposerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5B64A523B2613800E86EAF /* VideoTransformationComposerTests.swift */; };
+		EA5B64A623B2613800E86EAF /* VideoTransformationComposerAspectFillTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5B64A523B2613800E86EAF /* VideoTransformationComposerAspectFillTests.swift */; };
 		EA5B64AA23B2982400E86EAF /* ParametrizedTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5B64A923B2982400E86EAF /* ParametrizedTestCase.m */; };
+		EA5B64AD23B5146300E86EAF /* VideoTransformationComposerAspectFitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5B64AC23B5146300E86EAF /* VideoTransformationComposerAspectFitTests.swift */; };
 		EA989BE023AD061D00EC954F /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA989BDF23AD061D00EC954F /* Result.swift */; };
 		EA989BE123AD061D00EC954F /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA989BDF23AD061D00EC954F /* Result.swift */; };
 		EA989BE323AD100400EC954F /* PHAsset+Compressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA989BE223AD100400EC954F /* PHAsset+Compressor.swift */; };
@@ -46,11 +47,12 @@
 
 /* Begin PBXFileReference section */
 		EA5B64A223B2512100E86EAF /* TransformableVideoTrackProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformableVideoTrackProtocol.swift; sourceTree = "<group>"; };
-		EA5B64A523B2613800E86EAF /* VideoTransformationComposerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTransformationComposerTests.swift; sourceTree = "<group>"; };
+		EA5B64A523B2613800E86EAF /* VideoTransformationComposerAspectFillTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTransformationComposerAspectFillTests.swift; sourceTree = "<group>"; };
 		EA5B64A723B297F100E86EAF /* ParametrizedTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParametrizedTestCase.h; sourceTree = "<group>"; };
 		EA5B64A823B2982400E86EAF /* AVCompressorTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AVCompressorTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		EA5B64A923B2982400E86EAF /* ParametrizedTestCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParametrizedTestCase.m; sourceTree = "<group>"; };
 		EA5B64AB23B29B0B00E86EAF /* RuntimeTestsExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeTestsExample.swift; sourceTree = "<group>"; };
+		EA5B64AC23B5146300E86EAF /* VideoTransformationComposerAspectFitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTransformationComposerAspectFitTests.swift; sourceTree = "<group>"; };
 		EA989BDF23AD061D00EC954F /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		EA989BE223AD100400EC954F /* PHAsset+Compressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAsset+Compressor.swift"; sourceTree = "<group>"; };
 		EA989BE523AFE5CA00EC954F /* VideoTransformationComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTransformationComposer.swift; sourceTree = "<group>"; };
@@ -128,7 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				EAFFDDE4238827110042959D /* AVCompressorTests.swift */,
-				EA5B64A523B2613800E86EAF /* VideoTransformationComposerTests.swift */,
+				EA5B64A523B2613800E86EAF /* VideoTransformationComposerAspectFillTests.swift */,
+				EA5B64AC23B5146300E86EAF /* VideoTransformationComposerAspectFitTests.swift */,
 				EA5B64AB23B29B0B00E86EAF /* RuntimeTestsExample.swift */,
 				EAFFDDE6238827110042959D /* Info.plist */,
 				EA5B64A723B297F100E86EAF /* ParametrizedTestCase.h */,
@@ -271,7 +274,8 @@
 				EA989BF023B0215800EC954F /* VideoOrientation.swift in Sources */,
 				EA989BED23B01F3D00EC954F /* AVAssetTrack+TransformableVideoTrack.swift in Sources */,
 				EAFFDDFE239145A90042959D /* Compressor.swift in Sources */,
-				EA5B64A623B2613800E86EAF /* VideoTransformationComposerTests.swift in Sources */,
+				EA5B64AD23B5146300E86EAF /* VideoTransformationComposerAspectFitTests.swift in Sources */,
+				EA5B64A623B2613800E86EAF /* VideoTransformationComposerAspectFillTests.swift in Sources */,
 				EA989BE423AD100400EC954F /* PHAsset+Compressor.swift in Sources */,
 				EA989BE123AD061D00EC954F /* Result.swift in Sources */,
 				EAFFDE042391902D0042959D /* CompressorError.swift in Sources */,
